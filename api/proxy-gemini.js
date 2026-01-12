@@ -28,8 +28,13 @@ export default async function handler(request, response) {
         }
 const API_ENDPOINT = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent`;
         const requestBody = {
-            contents: [{ parts: [{ text: "Qual a capital do Brasil?" }] }],
-        };
+    contents: [{
+        role: "user", // <<<<<< ADICIONE ESTA LINHA
+        parts: [{
+            text: "Qual a capital do Brasil?"
+        }]
+    }],
+};
 
         const geminiResponse = await fetch(API_ENDPOINT, {
             method: 'POST',
