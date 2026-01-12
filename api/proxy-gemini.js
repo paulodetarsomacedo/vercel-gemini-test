@@ -26,8 +26,7 @@ export default async function handler(request, response) {
         if (!PROJECT_ID) {
             throw new Error("ID do Projeto Google não encontrado no ambiente.");
         }
-        const API_ENDPOINT = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/us-central1/publishers/google/models/gemini-1.5-flash-001:generateContent`;
-
+const API_ENDPOINT = `https://us-central1-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/us-central1/publishers/google/models/gemini-1.5-flash-preview-0514:generateContent`;
         const requestBody = {
             contents: [{ parts: [{ text: "Qual a capital do Brasil?" }] }],
         };
