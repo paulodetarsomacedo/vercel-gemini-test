@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h1>Teste Vercel + Vertex AI</h1>
+    <button id="testButton">Chamar a IA!</button>
+    <p>Resposta: <span id="response">...</span></p>
+
+    <script>
+        document.getElementById('testButton').addEventListener('click', async () => {
+            const responseSpan = document.getElementById('response');
+            responseSpan.textContent = 'Chamando a IA...';
+
+            try {
+                // ATENÇÃO: A URL agora é RELATIVA! Aponta para o nosso backend.
+                const response = await fetch('/api/proxy-gemini', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+
+                responseSpan.textContent = data.texto;
+
+            } catch (error) {
+                responseSpan.textContent = `ERRO: ${error.message}`;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
